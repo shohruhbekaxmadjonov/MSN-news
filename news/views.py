@@ -1,7 +1,7 @@
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import render, redirect
 
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from .models import News
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -57,9 +57,32 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 auth_login(request, user)
-                messages.success(request, f'Hi {username.title()}, welcome back!')
                 return redirect('main')
 
         # form is not valid or user is not authenticated
         messages.error(request, f'Invalid username or password')
         return render(request, 'news/login.html', {'form': form})
+
+
+def logout(request):
+    auth_logout(request)
+    messages.success(request, f'You have been successfully logged out')
+    return redirect('login')
+
+
+def register(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'news/register.html', {'form': form})
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
+            login(request)
+            return redirect('main')
+        else:
+            return render(request, 'news/register.html', {'form': form})

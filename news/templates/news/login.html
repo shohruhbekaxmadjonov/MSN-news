@@ -1,4 +1,6 @@
 {% extends "news/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Login Page
@@ -12,17 +14,24 @@
                     {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                         <div class="alert alert-danger" role="alert">
                             {{ message }}
-                        </div>{% endif %}
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
 
                 </li>
             {% endfor %}
         </ul>
     {% endif %}
-    <form method="POST" novalidate>
+    <form class="w-50 mx-auto" method="POST" novalidate>
         {% csrf_token %}
         <h2>Login</h2>
-        {{ form.as_p }}
+        {{ form|crispy }}
         <input type="submit" value="Login"/>
+
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
     </form>
 
 {% endblock %}
