@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Navbar</a>
+        <a class="navbar-brand" href="{% url 'main' %}">Home</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -29,6 +29,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'category' 5 %}">Health</a>
                 </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+{#                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>#}
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+
             </ul>
             <form class="d-flex" role="search">
                 <input
