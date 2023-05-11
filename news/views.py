@@ -1,12 +1,15 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render
-from .models import News, Category
+from django.contrib.auth import authenticate, login as auth_login
+from django.shortcuts import render, redirect
+
+from .forms import LoginForm
+from .models import News
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 def main(request):
     searched = request.GET.get('search_word')
-    all_news = []
+    # all_news = []
     if searched:
         all_news = News.objects.filter(title__contains=searched)
     else:
@@ -38,3 +41,25 @@ def category(request, category_id):
         'news_list': news_list,
     }
     return render(request, 'news/category.html', context=data)
+
+
+def login(request):
+    if request.method == 'GET':
+        form = LoginForm()
+        return render(request, 'news/login.html', {'form': form})
+
+    elif request.method == 'POST':
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                auth_login(request, user)
+                messages.success(request, f'Hi {username.title()}, welcome back!')
+                return redirect('main')
+
+        # form is not valid or user is not authenticated
+        messages.error(request, f'Invalid username or password')
+        return render(request, 'news/login.html', {'form': form})
