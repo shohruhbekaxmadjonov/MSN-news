@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <form class="w-50 mx-auto" method="POST" novalidate>
+    <form class="w-25 mx-auto" method="POST" novalidate>
         {% csrf_token %}
         <h2>Sign Up</h2>
         {{ form|crispy }}

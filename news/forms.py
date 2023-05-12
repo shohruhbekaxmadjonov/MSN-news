@@ -12,3 +12,8 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+class NewsAddForm(forms.Form):
+    class Meta:
+        model = News
+        fields = ['title', 'content', 'media', 'category']
