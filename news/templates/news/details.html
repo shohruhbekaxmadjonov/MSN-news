@@ -5,12 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
         <div class="col">
             <div class="card h-100">
                 <img src="{{ news.media.url }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ news.title }}</h5>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">{{ news.title }}</h5>
+                        <div>
+                            <a href="{% url 'edit_news' news.id %}" class="btn btn-success">Edit</a>
+                            <a href="{% url 'main' %}" class="btn btn-primary">Home</a>
+                        </div>
+                    </div>
                     <p class="card-text">{{ news.content }}</p>
                     <p class="card-text"><small class="text-body-secondary">{{ news.published_date }}</small></p>
                 </div>

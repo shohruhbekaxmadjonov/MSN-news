@@ -5,40 +5,34 @@
 {% endblock %}
 
 {% block content %}
-    {#        {% for news in page_obj %}#}
-    {#            <h3>{{ news.title }}</h3>#}
-    {#            <p>{{ news.content | truncatewords:10 }}</p>#}
-    {#            <p>{{ news.published_date }}</p>#}
-    {#            <img src="{{ news.media.url }}" style="height: 500px;width: 600px">#}
-    {#        {% endfor %}#}
 
-    {#    {% if page_obj.has_other_pages %}#}
-    {#        <nav aria-label="Page navigation example">#}
-    {#            <ul class="pagination">#}
-    {#                {% if page_obj.has_previous %}#}
-    {#                    <li class="page-item"><a class="page-link"#}
-    {#                                             href="?page={{ page_obj.previous_page_number }}"><i#}
-    {#                            class="fa-solid fa-arrow-left"></i></a></li>#}
-    {#                {% endif %}#}
-    {##}
-    {#                {% for p in page_obj.paginator.page_range %}#}
-    {#                    {% if page_obj.number == p %}#}
-    {#                        <li class="page-item active" aria-current="page">#}
-    {#                            <a class="page-link" href="?page={{ p }}">{{ p }}</a>#}
-    {#                        </li>#}
-    {#                    {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}#}
-    {#                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>#}
-    {#                    {% endif %}#}
-    {#                {% endfor %}#}
-    {##}
-    {#                {% if page_obj.has_next %}#}
-    {#                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i#}
-    {#                            class="fa-solid fa-arrow-right"></i></a>#}
-    {#                    </li>#}
-    {#                {% endif %}#}
-    {#            </ul>#}
-    {#        </nav>#}
-    {#    {% endif %}#}
+{#    {% if page_obj.has_other_pages %}#}
+{#        <nav aria-label="Page navigation example">#}
+{#            <ul class="pagination">#}
+{#                {% if page_obj.has_previous %}#}
+{#                    <li class="page-item"><a class="page-link"#}
+{#                                             href="?page={{ page_obj.previous_page_number }}"><i#}
+{#                            class="fa-solid fa-arrow-left"></i></a></li>#}
+{#                {% endif %}#}
+{##}
+{#                {% for p in page_obj.paginator.page_range %}#}
+{#                    {% if page_obj.number == p %}#}
+{#                        <li class="page-item active" aria-current="page">#}
+{#                            <a class="page-link" href="?page={{ p }}">{{ p }}</a>#}
+{#                        </li>#}
+{#                    {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}#}
+{#                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{##}
+{#                {% if page_obj.has_next %}#}
+{#                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i#}
+{#                            class="fa-solid fa-arrow-right"></i></a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </nav>#}
+{#    {% endif %}#}
 
 
     <div class="row">
@@ -49,7 +43,7 @@
                         <img src="{{ news.media.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ news.title }}</h5>
-                            <p class="card-text">{{ news.content }}</p>
+                            <p class="card-text">{{ news.content | truncatewords:10 }}</p>
                         </div>
                     </div>
                 </a>
@@ -58,11 +52,4 @@
     </div>
 
 
-
-    {#    {% for news in all_news %}#}
-    {#        <h3>{{ news.title }}</h3>#}
-    {#        <p>{{ news.content | truncatewords:10 }}</p>#}
-    {#        <p>{{ news.published_date }}</p>#}
-    {#        <img src="{{ news.media.url }}" style="height: 500px;width: 600px">#}
-    {#    {% endfor %}#}
 {% endblock %}

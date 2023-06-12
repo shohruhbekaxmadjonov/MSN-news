@@ -1,4 +1,7 @@
 /*Main page*/
+body {
+    padding-bottom: 100px;
+}
 
 .card-link {
     text-decoration: none;
